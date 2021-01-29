@@ -1,0 +1,8 @@
+Laboratory 5
+
+aws sns create-topic --name "MHLab5Topic"
+
+aws sns subscribe --topic-arn arn:aws:sns:us-east-1:730137829101:MHLab5Topic --protocol email --notification-endpoint taraskohnord@gmail.com
+
+
+aws cloudwatch put-metric-alarm --alarm-name StatusCheck --alarm-description "Lab5HealthStatus" --metric-name HealthyHostCount --namespace AWS/ApplicationELB --statistic Minimum --dimensions Name=LoadBalancer,Value=loadbalancer/app/Lab4MH/6d45758ecb5bdba4 Name=TargetGroup,Value=targetgroup/Lab4MHTargetGroup/c2925d017774f346 --unit Count --period 300 --threshold 2 --evaluation-periods 2 --comparison-operator LessThanThreshold --alarm-actions arn:aws:sns:us-east-1:730137829101:MHLab5Topic
